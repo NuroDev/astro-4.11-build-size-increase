@@ -5,7 +5,15 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
+  adapter: cloudflare(),
   integrations: [preact()],
   output: "server",
-  adapter: cloudflare()
+  vite: {
+    ssr: {
+      external: ['@resvg/resvg-js'],
+    },
+    optimizeDeps: {
+      exclude: ['@resvg/resvg-js'],
+    },
+  },
 });
